@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 # 1. Write some data or dictionary into a file. Take input from user. Append each time.
 # 2. Read data from file and allow for searching data.
 import json
