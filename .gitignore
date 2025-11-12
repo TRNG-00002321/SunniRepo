@@ -1,1 +1,5 @@
+# Intellij and PyCharm IDE configs
 **/.idea
+
+# Java files
+**/*.class
