@@ -1,0 +1,27 @@
+{
+  "users" : [
+    {
+      "username": "admin",
+      "password": "pass"
+    },
+    {
+      "username": "alice",
+      "password": "wonderland25"
+    }
+  ],
+  "expense_reports": [
+    {
+      "id": 0,
+      "user_id": 1,
+      "amount": 150,
+      "description": "Client Dinner",
+      "date": "11-12-2025"
+    }
+  ]
+}
+
+id 	Integer 	Primary Key
+user_id 	Integer 	Foreign Key to users
+amount 	REAL 	Expense amount
+description 	TEXT 	Reason for expense request
+date 	TEXT 	Date of expense
