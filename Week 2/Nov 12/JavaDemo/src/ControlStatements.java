@@ -1,4 +1,4 @@
-
+package src;
 /* Assignment: 
 *	Take input from command line or scanner and practice the following control
 *	statements:
