@@ -5,3 +5,7 @@
 
 # Java files
 **/*.class
+
+# Misc. Files
+**/*.ppt
+**/*.pptx
