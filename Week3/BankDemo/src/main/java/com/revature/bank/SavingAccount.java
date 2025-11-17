@@ -1,5 +1,8 @@
 package com.revature.bank;
 
+import com.revature.ex.LowBalanceException;
+import com.revature.ex.NegativeTransactionException;
+
 public class SavingAccount extends BankAccount implements SimpleInterest{
 
     public SavingAccount(String id, String name, double balance){
@@ -7,9 +10,17 @@ public class SavingAccount extends BankAccount implements SimpleInterest{
     }
 
     @Override
-    public double withdraw(double amount){
+    public double withdraw(double amount) throws NegativeTransactionException, LowBalanceException {
+        if (amount < 0)
+            throw new NegativeTransactionException("Negative Withdrawal Amount: " + amount);
+
+        if(super.getBalance() < amount)
+            throw new LowBalanceException("Insufficient Funds: " + super.getBalance()
+                    + " for withdrawal amount: " + amount);
+
         double newBalance = super.getBalance() - amount;
         super.setBalance(newBalance);
+
         return amount;
     }
 
