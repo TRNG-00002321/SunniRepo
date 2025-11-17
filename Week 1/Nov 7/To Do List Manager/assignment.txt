@@ -1,6 +1,0 @@
-To-Do List Manager: Create a program to add, view, mark as complete,
-and delete tasks from a list/dictionary, potentially saving the list/dictionary to a file.
-Please use the following as well while writing code
-1. Functions
-2. Modules (Optional)
-3. Imports (Optional)

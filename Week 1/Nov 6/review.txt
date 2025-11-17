@@ -1,8 +1,0 @@
-# Review
-1. Logging
-2. Anonymous Functions , Lambda Functions
-3. Generator Expressions - Self learning
-4. map filter and reduce function in python
-5. zip function in python
-6. File Handling
-
