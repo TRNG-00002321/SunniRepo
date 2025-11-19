@@ -1,0 +1,20 @@
+Assignment:
+1. Iterate over a list from the end to the beginning
+2. Try various collection methods on ArrayList and LinkedList
+3. Create a list to add and iterate over five objects of person having id, name, and age
+
+1. Modify the Collections.sort to sort in reverse order.
+
+- Create a class Employee having attributes:
+	- id, name, salary
+- Create constructors, setters, getters, toString
+- In a separate class create 5 employees and add them to a list.
+- Display the list
+- Display the list sorted by id
+- Display the list sorted by name
+- Display the list sorted by salary
+- Write code for comparable and comparator
+
+
+Questions:
+- Can you add null to a set
