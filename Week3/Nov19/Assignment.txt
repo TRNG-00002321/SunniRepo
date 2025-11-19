@@ -1,0 +1,21 @@
+Self Study:
+	Java StreamApi
+		-Map
+		-Filter
+		-Collect
+
+-List Employees using enhanced for loop
+-List Employees using for each loop
+-Return all employee names in uppercase (map function)
+-From the existing list create a new list with employees having salaries > 10000 (filter function
+
+
+
+
+1. Write a lambda function that does not take a parameter and does not return a value, but simply prints "Hello"
+
+2. Write another lambda function that takes one String parameter and returns "Hello" and the argument in upper case.
+
+3. Write a lambda function with two string parameters, first and last name. Returns "Hello" and the last and first name concatenated
+
+4. Create a class Address having fields (street, city, zipcode). Create constructors, setter/getters and toString methods. create another class as person having (name, phone, Address). Create a main class wherein define two person objects. One with an address and the oterh without and check the nullability of an Address.
