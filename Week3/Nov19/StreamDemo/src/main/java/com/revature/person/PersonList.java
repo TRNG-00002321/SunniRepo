@@ -2,6 +2,7 @@ package com.revature.person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonList {
     public static void main(String[] args) {
@@ -27,10 +28,11 @@ public class PersonList {
         List<Person> newPersons =
                 personList.stream()
                         .filter(p -> p.getSalary() > 10000)
-                        .collect(
-                                () -> new ArrayList<>(),
-                                (c, e) -> c.add(e),
-                                (c1, c2) -> c1.addAll(c2));
+//                        .collect(
+//                                () -> new ArrayList<>(),
+//                                (c, e) -> c.add(e),
+//                                (c1, c2) -> c1.addAll(c2));
+                        .collect(Collectors.toList());
         System.out.println(newPersons);
 
 

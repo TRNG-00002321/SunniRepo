@@ -1,0 +1,3 @@
+2025-11-19 13:20:36,398 INFO [main] LogDemo [LogDemo.java:7] - This is info
+2025-11-19 13:20:36,401 WARN [main] LogDemo [LogDemo.java:8] - This is warning
+2025-11-19 13:20:36,401 ERROR [main] LogDemo [LogDemo.java:9] - This is error
