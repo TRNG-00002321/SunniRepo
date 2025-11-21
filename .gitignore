@@ -9,3 +9,5 @@
 # Misc. Files
 **/*.ppt
 **/*.pptx
+
+**/.gitignore
