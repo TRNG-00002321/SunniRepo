@@ -24,6 +24,5 @@ public class MultiObjJson {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
