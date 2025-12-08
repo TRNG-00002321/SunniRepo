@@ -1,6 +1,4 @@
 package com.revature.junitdemo;
-import com.revature.junitdemo.Calculator;
-
 import org.junit.jupiter.api.*;
 
 public class CalculatorTest {
