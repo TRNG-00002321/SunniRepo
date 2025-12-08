@@ -4,8 +4,7 @@
 **/*.iml
 
 # Java files
-**/*.class
-
+**/src/target
 # Misc. Files
 **/*.ppt
 **/*.pptx

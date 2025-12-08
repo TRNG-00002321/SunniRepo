@@ -1,0 +1,4 @@
+a, b, expectedResult
+45, 5, 9
+24, 4, 6
+5, 10, 0
