@@ -4,7 +4,7 @@
 **/*.iml
 
 # Java files
-**/src/**/target
+**/target
 # Misc. Files
 **/*.ppt
 **/*.pptx
