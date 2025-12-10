@@ -1,9 +1,7 @@
-package com.revature.string;
+package com.revature;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import com.revature.user.model.User;
 
 public class StringUtilsTest {
 
