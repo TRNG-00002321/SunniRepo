@@ -24,7 +24,4 @@ public class CalculatorTest {
         actualResult = calculator.subtract(n1, n2);
         Assertions.assertEquals(expectedResult, actualResult);
     }
-
-
-
 }

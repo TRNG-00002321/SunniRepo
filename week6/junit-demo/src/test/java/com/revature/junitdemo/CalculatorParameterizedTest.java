@@ -1,5 +1,7 @@
 package com.revature.junitdemo;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -7,8 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
 
 public class CalculatorParameterizedTest {
     Calculator calculator = null;
@@ -34,16 +34,12 @@ public class CalculatorParameterizedTest {
     @ParameterizedTest(name="Adding {0} and {1} is {2}")
     @CsvFileSource(resources = "/testData.csv", numLinesToSkip = 1)
     public void testAddAgain(int a, int b, int expectedResult){
-        int x = 10;
-        int y = 20;
         Assertions.assertEquals(calculator.add(a, b), expectedResult);
     }
 
     @ParameterizedTest(name="Adding {0} and {1} is {2} using method")
     @MethodSource("testDataMethod")
     public void testAddThirdTime(int a, int b, int expectedResult){
-        int x = 10;
-        int y = 20;
         Assertions.assertEquals(calculator.add(a, b), expectedResult);
     }
 
@@ -54,7 +50,6 @@ public class CalculatorParameterizedTest {
                 Arguments.of(3, -6, 9),
                 Arguments.of(4, 8, 12)
         );
-
     }
 
 
