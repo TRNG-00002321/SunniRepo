@@ -10,3 +10,7 @@
 **/*.pptx
 
 **/.gitignore
+
+# VS Code
+**/.vscode
+
