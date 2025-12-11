@@ -16,3 +16,4 @@
 
 # Python venvs
 **/.venv
+**/__pycache__
