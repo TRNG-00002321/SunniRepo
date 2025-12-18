@@ -7,18 +7,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+@DisplayName("Calculator.add() Tests")
 public class CalculatorAddTests {
+
     Calculator calculator = null;
 
     @BeforeEach
-    void setup(){
-        System.out.println("This is a setup method... Before Each");
+    void setup() {
+        // System.out.println("This is a setup method... Before Each");
         calculator = new Calculator();
     }
 
     @Test
     @DisplayName("Positive Test - Add")
-    void testAdd(){
+    void testAdd() {
         //Arrange
         int n1 = 10;
         int n2 = 12;
@@ -32,7 +34,7 @@ public class CalculatorAddTests {
 
     @Test
     @DisplayName("Negative Test - Add")
-    void testNegative(){
+    void testNegative() {
 
         //Arrange
         int n1 = 10;
@@ -46,9 +48,9 @@ public class CalculatorAddTests {
         Assertions.assertEquals(expectedResult, actualResult, "");
     }
 
-    @ParameterizedTest(name="{0} + {1} = {2}")
+    @ParameterizedTest(name = "{0} + {1} = {2}")
     @CsvFileSource(resources = "/additionData.csv", numLinesToSkip = 1)
-    public void testAddParam(int a, int b, int expectedResult){
+    public void testAddParam(int a, int b, int expectedResult) {
         Assertions.assertEquals(expectedResult, calculator.add(a, b));
     }
 }

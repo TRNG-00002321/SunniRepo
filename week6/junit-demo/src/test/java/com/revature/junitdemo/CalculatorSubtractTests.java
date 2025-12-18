@@ -7,18 +7,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+@DisplayName("Calculator.subtract() Tests")
 public class CalculatorSubtractTests {
+
     Calculator calculator = null;
 
     @BeforeEach
-    void setup(){
-        System.out.println("This is a setup method... Before Each");
+    void setup() {
+        // System.out.println("This is a setup method... Before Each");
         calculator = new Calculator();
     }
 
     @Test
     @DisplayName("Positive Test - Subtract")
-    void testSubtract(){
+    void testSubtract() {
         //Arrange
         int n1 = 35;
         int n2 = 5;
@@ -30,9 +32,9 @@ public class CalculatorSubtractTests {
         Assertions.assertEquals(expectedResult, actualResult);
     }
 
-    @ParameterizedTest(name="{0} - {1} = {2}")
+    @ParameterizedTest(name = "{0} - {1} = {2}")
     @CsvFileSource(resources = "/subtractionData.csv", numLinesToSkip = 1)
-    public void paramTestSubtract(int a, int b, int expectedResult){
+    public void paramTestSubtract(int a, int b, int expectedResult) {
         Assertions.assertEquals(expectedResult, calculator.subtract(a, b));
     }
 
