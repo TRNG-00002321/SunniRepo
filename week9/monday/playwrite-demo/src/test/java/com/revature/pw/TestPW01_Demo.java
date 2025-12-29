@@ -1,0 +1,38 @@
+package com.revature.pw;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+
+@DisplayName("Playwright Demo")
+public class TestPW01_Demo {
+    @DisplayName("Basic PW Test")
+    @Test
+    public void basicTest() {
+        // Playwright.create() initializes the Playwright Library
+
+        try (Playwright playwright = Playwright.create()) {
+
+            Browser browser = playwright.chromium().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false) // Default headless = true
+                            .setSlowMo(500) // Slow down for visibility
+            );
+
+            // Create a new page
+            Page page = browser.newPage();
+
+            // Navigate to a url
+            page.navigate("https://playwright.dev");
+
+            // Get and print Title
+            String title = page.title();
+            System.out.println("Title: " + title);
+            // System.out.println("URL: " + page.getUt);
+        }
+    }
+}
