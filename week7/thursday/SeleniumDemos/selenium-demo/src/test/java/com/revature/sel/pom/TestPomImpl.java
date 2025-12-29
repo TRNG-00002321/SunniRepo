@@ -1,20 +1,17 @@
-package com.revature.sel;
+package com.revature.sel.pom;
 
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@DisplayName("Basic Selenium Test")
-public class Test03SelectDemo {
+@DisplayName("POM Implementation")
+public class TestPomImpl {
 
     private WebDriver driver;
     private final String BASE_URL = "https://the-internet.herokuapp.com/";
@@ -28,8 +25,8 @@ public class Test03SelectDemo {
         // initialize webdriver
         // driver = new ChromeDriver();
         driver = new FirefoxDriver();
-
         driver.manage().window().maximize();
+        driver.get(BASE_URL + "/login");
     }
 
     @AfterEach
@@ -40,19 +37,17 @@ public class Test03SelectDemo {
     }
 
     @Test
-    public void testDelcetDemo() {
-        driver.get(BASE_URL + "/dropdown");
+    void testLoginValid() {
+        LoginPage loginPage = new LoginPage(driver);
+        // SecurePage securePage = loginPage
+        //         .enterUsername("tomsmith")
+        //         .enterPassword("SuperSecretPassword!")
+        //         .clickLogin();
 
-        WebElement dropElement = driver.findElement((By.id("dropdown")));
-
-        Select dropdown = new Select(dropElement);
-        dropdown.isMultiple(); // returns boolean value
-        // dropdown.selectByVisibleText("Option 2");
-        dropdown.selectByValue("1");
-        WebElement selectedOption = dropdown.getFirstSelectedOption();
-
-        // assertEquals("Option 1", selectedOption.getText());
-        assertEquals("1", selectedOption.getAttribute("value"));
+        SecurePage securePage = loginPage.loginAs("tomsmith", "SuperSecretPassword!");
+        assertTrue(securePage.getFlashMessage().contains("logged"));
 
     }
 }
+// 1-3 exercises and review
+// 3-5 project work;

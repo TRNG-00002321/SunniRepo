@@ -1,5 +1,7 @@
 package com.revature.pw;
 
+import java.util.regex.Pattern;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +9,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @DisplayName("Playwright Demo")
 public class TestPW01_Demo {
@@ -33,6 +36,13 @@ public class TestPW01_Demo {
             String title = page.title();
             System.out.println("Title: " + title);
             // System.out.println("URL: " + page.getUt);
+
+            // Auto-waiting locator
+            page.locator("text=Get started").click();
+
+            // Auto-retrying assertion
+            assertThat(page).hasURL(Pattern.compile(".*intro"));
+
         }
     }
 }
