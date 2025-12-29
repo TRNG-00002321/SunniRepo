@@ -17,14 +17,14 @@ BASE_URL = 'https://the-internet.herokuapp.com/'
 def test_page_title():
     """Verify the page title matches expected value."""
     # YOUR CODE HERE
-    with create_chrome_driver() as driver:
+    with create_chrome_driver(headless=True) as driver:
         driver.get(BASE_URL)
         assert BASE_URL == driver.current_url
 
 def test_heading_text():
     """Verify the main heading contains expected text."""
     # YOUR CODE HERE
-    with create_chrome_driver() as driver:
+    with create_chrome_driver(headless=True) as driver:
         driver.get(BASE_URL)
         element = driver.find_element(By.CSS_SELECTOR, 'h1.heading')
         assert 'Welcome to the-internet' in element.text
@@ -34,7 +34,7 @@ def test_links_present():
     # YOUR CODE HERE
     # Use find_elements to get all links
     # Use list comprehension to extract link texts
-    with create_chrome_driver() as driver:
+    with create_chrome_driver(headless=True) as driver:
         driver.get(BASE_URL)
         # Get all links and extract their text
         links = driver.find_elements(By.TAG_NAME, "a")
@@ -46,7 +46,7 @@ def test_links_present():
 def test_link_attributes():
     """Verify that links have correct href attributes."""
     # YOUR CODE HERE
-    with create_chrome_driver() as driver:
+    with create_chrome_driver(headless=True) as driver:
         driver.get(BASE_URL)
         links = driver.find_elements(By.TAG_NAME, "a")
         hrefs = [link.get_attribute('href') for link in links if link.get_attribute('href')]
