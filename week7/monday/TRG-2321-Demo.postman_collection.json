@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "465fcb3d-4a9e-44eb-ba36-fcbda5c0fa59",
+		"name": "TRG-2321-Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50827783",
+		"_collection_link": "https://sunnismagan-3866836.postman.co/workspace/Sunni-Magan's-Workspace~bd444ea7-195e-4965-8915-1d4cfc685b89/collection/50827783-465fcb3d-4a9e-44eb-ba36-fcbda5c0fa59?action=share&source=collection_link&creator=50827783"
+	},
+	"item": [
+		{
+			"name": "Get All Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Response is An Array\", function() {\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Array has items\", function(){\r",
+							"    pm.expect(jsonData).to.have.length.above(0)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Array has 100 posts\", function() {\r",
+							"    pm.expect(jsonData).to.have.lengthOf(100);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Array items have correct structure\", function() {\r",
+							"    const post = jsonData[0];\r",
+							"    pm.expect(post).to.have.all.keys(\"userId\", \"id\", \"title\", \"body\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Array elements have id property\", function() {\r",
+							"    jsonData.forEach( (item, index) => {\r",
+							"        pm.expect(item).to.have.property(\"id\");\r",
+							"    })\r",
+							"})\r",
+							"\r",
+							"pm.test(\"array elements have unique id property\", function() {\r",
+							"    const ids = jsonData.map(item => item.id);\r",
+							"    pm.expect(ids).to.have.lengthOf(100);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Array elements have id between 1 and 10\", function() {\r",
+							"    jsonData.forEach( (item, index) => {\r",
+							"        pm.expect(item.userId).to.be.within(1, 10);\r",
+							"    })\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status Code is Sucess (2xx)\", function() {\r",
+							"    pm.expect(pm.response.code).to.be.within(200, 299);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status Message is OK\", function(){\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"})\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"//Test Reponse has required fields\r",
+							"pm.test(\"Reponse Has Required Fields\", function(){\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"title\");\r",
+							"    pm.expect(jsonData).to.have.property(\"body\");\r",
+							"    pm.expect(jsonData).to.have.property(\"userId\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Field Types Are Correct\", function(){\r",
+							"    pm.expect(jsonData.id).to.be.a(\"number\");\r",
+							"    pm.expect(jsonData.title).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.body).to.be.a(\"string\");\r",
+							"    pm.expect(jsonData.userId).to.be.a(\"number\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Post ID is 1\", function(){\r",
+							"    pm.expect(jsonData.id).to.equal(1);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Post Title is Not Empty\", function(){\r",
+							"    pm.expect(jsonData.title).to.not.be.empty;\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get with Query Parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response has required fields\", function(){",
+							"    const responseArray = pm.response.json();",
+							"    ",
+							"    pm.expect(responseArray).to.be.an(\"array\").that.is.not.empty;",
+							"    ",
+							"    const user = responseArray[0];    ",
+							"    pm.expect(user).to.have.property(\"postId\");",
+							"    pm.expect(user).to.have.property(\"id\");",
+							"    pm.expect(user).to.have.property(\"email\");",
+							"    // pm.expect(response).to.have.property(\"age\")",
+							"})",
+							"",
+							"pm.test(\"Response has required fields\", function(){",
+							"    const responseArray = pm.response.json();",
+							"    ",
+							"    pm.expect(responseArray).to.be.an(\"array\").that.is.not.empty;",
+							"    ",
+							"    const user = responseArray[0];",
+							"    pm.expect(user.postId).to.equal(1);",
+							"    pm.expect(user.id).to.equal(1);",
+							"    pm.expect(user.email).to.equal(\"Eliseo@gardner.biz\");",
+							"    // pm.expect(response).to.have.property(\"age\")",
+							"})",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/comments?postId=1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"comments"
+					],
+					"query": [
+						{
+							"key": "postId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert Data to Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \"userId\": 1,\r\n    \"id\": 101,\r\n    \"title\": \"some data\",\r\n    \"body\": \"some text some text some text some text \"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Response-Timeout",
+						"value": "{{timeout}}",
+						"type": "text"
+					},
+					{
+						"key": "X-Debug-Mode",
+						"value": "{{debugMode}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 1,\r\n    \"id\": 1,\r\n    \"title\": \"Updated Title - API Testing\",\r\n    \"body\": \"This post has been updated via PUT request\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is a json object\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Albums",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/albums",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comments for Post 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 404\", function() {\r",
+							"    pm.response.to.have.status(404);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Reponse Object is empty\", function() {\r",
+							"    const body = pm.response.json();\r",
+							"    pm.expect(Object.keys(body)).to.have.lengthOf(0);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/posts/9999",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Endpoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 404\", function() {\r",
+							"    pm.response.to.have.status(404)\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/invalid",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"invalid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Missing Required Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/posts/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"// Log current environment configuration\r",
+					"console.log(\"=== Environment Configuration ===\");\r",
+					"console.log(\"Base URL:\", pm.environment.get(\"baseUrl\"));\r",
+					"console.log(\"API Version:\", pm.environment.get(\"apiVersion\"));\r",
+					"console.log(\"Debug Mode:\", pm.environment.get(\"debugMode\"));\r",
+					"console.log(\"================================\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"\r",
+					"// Test: Response time is acceptable\r",
+					"pm.test(\"Response time is under 500ms\", function() {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+					"});\r",
+					"\r",
+					"// Test: Header exists\r",
+					"pm.test(\"Has required headers\", function() {\r",
+					"    pm.response.to.have.header(\"Content-Type\");\r",
+					"    pm.response.to.have.header(\"Cache-Control\")\r",
+					"    pm.response.to.have.header(\"Date\");\r",
+					"});\r",
+					"\r",
+					"// Test: Content-Type header\r",
+					"pm.test(\"Content-Type is JSON\", function() {\r",
+					"    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+					"        .to.include(\"application/json\");\r",
+					"});\r",
+					"\r",
+					"pm.test(\"Content-Length exists and is a number\", function() {\r",
+					"    // pm.request.method.\r",
+					"    pm.response.to.have.header(\"Content-Length\");\r",
+					"    pm.expect(Number(pm.response.headers.get(\"Content-Length\")))\r",
+					"})\r",
+					"\r",
+					"\r",
+					"// Conditional assertions based on environment\r",
+					"const debugMode = pm.environment.get(\"debugMode\") === \"true\";\r",
+					"\r",
+					"pm.test(\"Response time within SLA\", function() {\r",
+					"    const timeout = parseInt(pm.environment.get(\"timeout\"));\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+					"});\r",
+					"\r",
+					"if (debugMode) {\r",
+					"    console.log(\"Full response:\", pm.response.json());\r",
+					"}\r",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		}
+	]
+}

@@ -46,7 +46,7 @@ public class Test03SelectDemo {
         WebElement dropElement = driver.findElement((By.id("dropdown")));
 
         Select dropdown = new Select(dropElement);
-        dropdown.isMultiple(); // returns boolean value 
+        dropdown.isMultiple(); // returns boolean value
         // dropdown.selectByVisibleText("Option 2");
         dropdown.selectByValue("1");
         WebElement selectedOption = dropdown.getFirstSelectedOption();

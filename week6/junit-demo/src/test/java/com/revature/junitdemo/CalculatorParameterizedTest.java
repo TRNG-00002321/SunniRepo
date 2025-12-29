@@ -11,46 +11,44 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class CalculatorParameterizedTest {
+
     Calculator calculator = null;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         calculator = new Calculator();
     }
 
     @ParameterizedTest(name = "{0} + {1} = {2}")
     @CsvSource({
-            "1, 2, 3",
-            "2, 2, 4",
-            "3, 2, 4",
-            "4, 4, 8"
+        "1, 2, 3",
+        "2, 2, 4",
+        "3, 2, 5",
+        "4, 4, 8"
     })
-    public void testAdd(int a, int b, int expectedResult){
-        int x = 10;
-        int y = 20;
+    public void testAdd(int a, int b, int expectedResult) {
         Assertions.assertEquals(calculator.add(a, b), expectedResult);
     }
 
-    @ParameterizedTest(name="Adding {0} and {1} is {2}")
+    @ParameterizedTest(name = "Adding {0} and {1} is {2}")
     @CsvFileSource(resources = "/testData.csv", numLinesToSkip = 1)
-    public void testAddAgain(int a, int b, int expectedResult){
+    public void testAddAgain(int a, int b, int expectedResult) {
         Assertions.assertEquals(calculator.add(a, b), expectedResult);
     }
 
-    @ParameterizedTest(name="Adding {0} and {1} is {2} using method")
+    @ParameterizedTest(name = "Adding {0} and {1} is {2} using method")
     @MethodSource("testDataMethod")
-    public void testAddThirdTime(int a, int b, int expectedResult){
+    public void testAddThirdTime(int a, int b, int expectedResult) {
         Assertions.assertEquals(calculator.add(a, b), expectedResult);
     }
 
-    static Stream<Arguments> testDataMethod(){
+    static Stream<Arguments> testDataMethod() {
         return Stream.of(
                 Arguments.of(1, 2, 3),
                 Arguments.of(2, 4, 6),
-                Arguments.of(3, -6, 9),
+                Arguments.of(3, -6, -3),
                 Arguments.of(4, 8, 12)
         );
     }
-
 
 }
